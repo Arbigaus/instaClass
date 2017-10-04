@@ -6,7 +6,7 @@ class cidadesController extends Controller {
     Estado::ReadAll();
     $data['lista_estados'] = Estado::getResult();
 
-    $this->loadTemplate('view_cidades',$data);
+    $this->loadTemplate('cidades/view_cidades',$data);
   }
 
   public function buscaCidades(){

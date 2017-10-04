@@ -18,7 +18,7 @@ class loginController extends Controller {
 
 		}
 
-		$this->loadView('login', $data);
+		$this->loadView('login/login', $data);
 
 	}
 }

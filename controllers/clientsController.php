@@ -7,13 +7,13 @@ class clientsController extends Controller{
 		Clients::ReadAll();
 		$data['list_client'] = Clients::getResult();
 
-		$this->loadTemplate("clients_list",$data);
+		$this->loadTemplate("clients/clients_list",$data);
 	}
 
 	public function add(){
 		$data = array();
 
-		$this->loadTemplate("clients_add",$data);
+		$this->loadTemplate("clients/clients_add",$data);
 
 	}
 // TODO: Adicionar via Ajax.
@@ -49,7 +49,7 @@ class clientsController extends Controller{
 		$data['list_client'] = Clients::getResult();
 
 
-		$this->loadTemplate("clients_edit",$data);
+		$this->loadTemplate("clients/clients_edit",$data);
 	}
 
 	public function edit_ajax(){
