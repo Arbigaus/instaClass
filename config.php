@@ -2,6 +2,8 @@
 require 'environment.php';
 
 define("BASE", "http://sistema.pc");
+define("BASEADMIN", "http://sistema.pc/admin");
+
 global $config;
 $config = array();
 if(ENVIRONMENT == "development") {

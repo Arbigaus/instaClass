@@ -1,4 +1,4 @@
-<?php 
+<?php
 class Core{
 
 	public function run(){
@@ -12,7 +12,7 @@ class Core{
 			$currentController = $url[0].'Controller';
 			array_shift($url);
 
-			if(isset($url[0])) {
+			if(isset($url[0]) && !empty($url[0])) {
 				$currentAction = $url[0];
 				array_shift($url);
 			}else{
