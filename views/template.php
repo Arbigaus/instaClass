@@ -2,7 +2,7 @@
 <html>
 <head>
         <meta http-equiv = "content-type" content = "text/html; charset=UTF-8">
-        <title>MVC</title>
+        <title>Sistema MVC</title>
         <link href="<?= BASE; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?= BASE; ?>/assets/css/font-awesome.css" rel="stylesheet">
 
