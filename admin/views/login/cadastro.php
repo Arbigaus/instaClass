@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Registration Page</title>
+  <title>Sistema MVC | Cadastro</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -37,21 +37,26 @@
   <div class="register-box-body">
     <p class="login-box-msg">Registrar uma nova conta</p>
 
-    <form action="<?php echo BASEADMIN; ?>" method="post">
+  <div class="alerta ">
+    <h4><i class="icones icon "></i><span class="title"></span></h4>
+    <div class="result "></div>
+  </div>
+
+    <form method="post" id="login/add">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Nome Completo">
+        <input type="text" name="name" class="form-control" placeholder="Nome Completo">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" name="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Senha">
+        <input type="password" name="passwd" class="form-control passwd" placeholder="Senha">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Digite a senha novamente">
+        <input type="password" name="v_passwd" class="form-control v_passwd" placeholder="Digite a senha novamente">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="row">
@@ -64,7 +69,9 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Salvar</button>
+          <button class="btn btn-success">
+      			<i class="i-send fa "></i> Enviar <i class="fa"></i>
+      		</button>
         </div>
         <!-- /.col -->
       </div>
@@ -91,7 +98,9 @@
 <script src="<?php echo BASEADMIN; ?>/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="<?php echo BASEADMIN; ?>/assets/plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo BASEADMIN; ?>/assets/js/ajax.js"></script>
 <script>
+var BASE = '<?php echo BASEADMIN; ?>'+'/'; // TODO: Enviando a variável BASE para o Ajax.
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',

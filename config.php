@@ -1,8 +1,12 @@
 <?php
 require 'environment.php';
 
-define("BASE", "http://sistema.pc");
-define("BASEADMIN", "http://sistema.pc/admin");
+// TODO: Definição da global BASE
+$url = "http://".$_SERVER['HTTP_HOST'];
+define("BASE", $url);
+
+$admin_url = $url."/admin";
+define("BASEADMIN", $admin_url);
 
 global $config;
 $config = array();

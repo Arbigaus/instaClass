@@ -754,5 +754,9 @@
 <script src="<?php echo BASEADMIN; ?>/assets/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo BASEADMIN; ?>/assets/dist/js/demo.js"></script>
+<script src="<?php echo BASEADMIN; ?>/assets/js/ajax.js"></script>
+<script type="text/javascript">
+  var BASE = '<?php echo BASEADMIN; ?>'+'/'; // TODO: Enviando a variável BASE para o Ajax.
+</script>
 </body>
 </html>

@@ -8,16 +8,6 @@ class loginController extends Controller {
 	public function index(){
 		$data = array();
 
-		// $dados_form = filter_input_array(INPUT_POST, FILTER_SANITIZE_MAGIC_QUOTES);
-		// if (isset($dados_form['user_email']) && !empty($dados_form['user_email'])){
-		//
-		// 	if(Users::logar($dados_form)){
-		// 		header("Location: ".BASEADMIN);
-		// 		exit();
-		// 	}
-		//
-		// }
-
 		$this->loadView('login/login', $data);
 
 	}
@@ -27,4 +17,23 @@ class loginController extends Controller {
 
 		$this->loadview('login/cadastro', $data);
 	}
+
+	public function add(){
+		$dados = [];
+
+		$dados_form = filter_input_array(INPUT_POST, FILTER_SANITIZE_MAGIC_QUOTES);
+		if(!in_array("",$dados_form)):
+			if($dados_form['v_passwd'] != $dados_form['passwd']):
+				$dados['return'] = $this->ajaxError("Senhas não conferem, favor digitar novamente.");
+			else:
+				$dados['return'] = $this->ajaxSuccess("Cadastro efetuado com sucesso.");
+			endif;
+		else:
+			$dados['return'] = $this->ajaxWarning("Favor preencher todos os campos.");
+		endif;
+
+		echo json_encode($dados);
+		exit();
+	}
+
 }

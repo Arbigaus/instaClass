@@ -1,6 +1,6 @@
 $(function(){
 
-	var BASE = "http://sistema.pc/admin/";
+	// var BASE = "http://sistema.pc/admin/";
 	var alerts = ["alert-info","alert-warning","alert-success","alert-danger"];
 
 	$('form').submit(function(){
