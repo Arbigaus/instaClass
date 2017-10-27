@@ -8,8 +8,10 @@ spl_autoload_register(function ($class){
 		}
 	} elseif (file_exists('models/'.$class.'.php')){
 		require_once 'models/'.$class.'.php';
-	} else{
+	} elseif (file_exists('core/'.$class.'.php')){
 		require_once 'core/'.$class.'.php';
+	} elseif (file_exists('library/'.$class.'.php')){
+		require_once 'library/'.$class.'.php';
 	}
 });
 

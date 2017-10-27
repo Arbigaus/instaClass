@@ -32,6 +32,7 @@ abstract class Model {
 		return self::$Result;
 	}
 
+	//TODO: Método CREATE
 	public static function Create(array $Fields){
 		try {
 

@@ -24,9 +24,20 @@ class loginController extends Controller {
 		$dados_form = filter_input_array(INPUT_POST, FILTER_SANITIZE_MAGIC_QUOTES);
 		if(!in_array("",$dados_form)):
 			if($dados_form['v_passwd'] != $dados_form['passwd']):
-				$dados['return'] = $this->ajaxError("Senhas não conferem, favor digitar novamente.");
+				$dados['return'] = $this->ajaxSuccess("Senhas não conferem, favor digitar novamente.");
 			else:
-				$dados['return'] = $this->ajaxSuccess("Cadastro efetuado com sucesso.");
+				unset($dados_form['v_passwd']);
+				// Fazer algo
+				if(Helpers::isMail($dados_form['email'])):
+					// TODO: Cadastro do usuario
+					if(Users::Create($dados_form)):
+						$dados['return'] = $this->ajaxSuccess("Cadastro efetuado.");
+					endif;
+						$dados['return'] = $this->ajaxDanger("Ocorreu algum erro, favor entrar em contato.");
+
+				else:
+					$dados['return'] = $this->ajaxWarning("E-mail inválido.");
+				endif;
 			endif;
 		else:
 			$dados['return'] = $this->ajaxWarning("Favor preencher todos os campos.");

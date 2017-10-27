@@ -11,6 +11,10 @@ class homeController extends Controller {
 		$data['lista'] = Pagination::createPagination();
 		$data['links'] = Pagination::createLinks();
 
+
+		$string = "Programar é uma arte, portanto nem todos irão admirar e gostar!.";
+		echo Helpers::limitWords($string, 9);
+
 		// echo "<pre>";
 		// print_r($data['links']);
 		// echo "</pre>";die;
