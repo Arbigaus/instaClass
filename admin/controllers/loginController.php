@@ -32,9 +32,9 @@ class loginController extends Controller {
 					// TODO: Cadastro do usuario
 					if(Users::Create($dados_form)):
 						$dados['return'] = $this->ajaxSuccess("Cadastro efetuado.");
-					endif;
+					else:
 						$dados['return'] = $this->ajaxDanger("Ocorreu algum erro, favor entrar em contato.");
-
+					endif;
 				else:
 					$dados['return'] = $this->ajaxWarning("E-mail inválido.");
 				endif;
