@@ -1,4 +1,9 @@
-
+<?php
+	if(!empty($_SESSION['id']) && isset($_SESSION['id'])){
+		header("Location: ".BASEADMIN);
+    exit();
+	}
+ ?>
 <!DOCTYPE html>
 <html>
 <head>

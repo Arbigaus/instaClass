@@ -15,11 +15,12 @@ class Users extends Model {
 		$passwd = md5($passwd);
 
 		if(self::ReadByField('email',$email)):
-			$user = self::getResult();
-			$user = $user[0];
-			if($passwd != $user['passwd']):
+			$array = self::getResult();
+			$array = $array[0];
+			if($passwd != $array['passwd']):
 				$data = 2;
 			else:
+				$_SESSION['id'] = $array['id'];
 				return $data = 3;
 			endif;
 		else:
@@ -29,4 +30,14 @@ class Users extends Model {
 		return $data;
 	}
 
+	public static function getLoggedUser($id){
+		$data = [];
+
+		if(self::ReadByField('id',$id)):
+			$data = self::getResult();
+			$data = $data[0];
+			unset($data['passwd']);
+			return $data;
+		endif;
+	}
 }

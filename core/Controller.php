@@ -1,8 +1,8 @@
-<?php 
+<?php
 class Controller {
 
 	public function __construct(){
-		
+
 	}
 
 	public function loadview($viewName, $viewData = array()){
@@ -11,6 +11,7 @@ class Controller {
 	}
 
 	public function loadTemplate($viewName, $viewData = array()){
+		
 		$count_client = Clients::CountClients();
 		include 'views/template.php';
 	}

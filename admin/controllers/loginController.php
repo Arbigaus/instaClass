@@ -8,16 +8,6 @@ class loginController extends Controller {
 	public function index(){
 		$data = array();
 
-		$user = Users::doLogin('rafael.cacator@cotrasa.com.br','1234');
-		// print_r($user);
-		if($user === 1):
-			$data['user'] = "Email inválido.";
-		elseif($user === 2):
-			echo "Senha inválida";
-		else:
-			// print_r($user);
-		endif;
-
 		$this->loadView('login/login', $data);
 
 	}
@@ -63,21 +53,24 @@ class loginController extends Controller {
 
 	  $dados_form = filter_input_array(INPUT_POST, FILTER_SANITIZE_MAGIC_QUOTES);
 	  if(!in_array("",$dados_form)):
-	    $return = Users::doLogin($dados_form['email'],$dados_form['passwd']);
-	    if($return === 1):
-	      $dados['return'] = $this->ajaxWarning('<a href="'.BASEADMIN.'/login/cadastro">clique aqui para cadastrar</a>.','E-mail não encontrado.');
-	    elseif($return === 2):
-	      $dados['return'] = $this->ajaxError("Favor conferir a senha.","Senha Incorreta");
-	    elseif($return === 3):
-	      $dados['return'] = $this->ajaxSuccess("Logado com sucesso");
-	    else:
-	      $dados['return'] = $this->ajaxError("Erro");
-	    endif;
-	  else:
-	    $dados['return'] = $this->ajaxWarning("Favor preencher todos os campos.");
+				if(Helpers::isMail($dados_form['email'])):
+		    $return = Users::doLogin($dados_form['email'],$dados_form['passwd']);
+		    if($return === 1):
+		      $dados['return'] = $this->ajaxWarning('<a href="'.BASEADMIN.'/login/cadastro">clique aqui para cadastrar</a>.','E-mail não encontrado.');
+		    elseif($return === 2):
+		      $dados['return'] = $this->ajaxError("Favor conferir a senha.","Senha Incorreta");
+		    elseif($return === 3):
+		      $dados['redirect'] = ["", 0];
+		    else:
+		      $dados['return'] = $this->ajaxError("Erro");
+		    endif;
+		  else:
+		    $dados['return'] = $this->ajaxWarning("Favor preencher todos os campos.");
+			endif;
 	  endif;
 
 	  echo json_encode($dados);
 	  exit();
 	}
+
 }
