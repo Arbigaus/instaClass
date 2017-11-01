@@ -71,7 +71,7 @@ class loginController extends Controller {
 	    elseif($return === 3):
 	      $dados['return'] = $this->ajaxSuccess("Logado com sucesso");
 	    else:
-	      $dados['return'] = $this->ajaxDanger("Erro");
+	      $dados['return'] = $this->ajaxError("Erro");
 	    endif;
 	  else:
 	    $dados['return'] = $this->ajaxWarning("Favor preencher todos os campos.");
