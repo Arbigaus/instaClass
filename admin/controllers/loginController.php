@@ -27,7 +27,7 @@ class loginController extends Controller {
 				$dados['return'] = $this->ajaxSuccess("Senhas não conferem, favor digitar novamente.");
 			else:
 				unset($dados_form['v_passwd']);
-				md5($dados_form['passwd']);
+				$dados_form['passwd'] = md5($dados_form['passwd']);
 				// Fazer algo
 				if(Helpers::isMail($dados_form['email'])):
 					// TODO: Cadastro do usuario
@@ -48,6 +48,7 @@ class loginController extends Controller {
 		exit();
 	}
 
+// TODO: Função para login do sistema.
 	public function login(){
 	  $dados = [];
 
@@ -71,6 +72,16 @@ class loginController extends Controller {
 
 	  echo json_encode($dados);
 	  exit();
+	}
+
+// TODO: Função para logout do sistema.
+	public function logout(){
+		// if(empty($_SESSION['id']) || !isset($_SESSION['id'])):
+			session_destroy();
+			header("Location: ".BASEADMIN."/login");
+			exit();
+		// endif;
+
 	}
 
 }

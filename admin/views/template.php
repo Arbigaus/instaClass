@@ -1,11 +1,7 @@
 <?php
 	if(empty($_SESSION['id']) || !isset($_SESSION['id'])){
 		header("Location: ".BASEADMIN."/login");
-
-
     exit();
-
-
 	}
  ?>
 <!DOCTYPE html>
@@ -15,7 +11,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>Sistema MVC | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -270,13 +266,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo BASEADMIN; ?>/assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo BASEADMIN; ?>/assets/dist/img/<?php echo $LoggedUser['picture']; ?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $LoggedUser['name']; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo BASEADMIN; ?>/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo BASEADMIN; ?>/assets/dist/img/<?php echo $LoggedUser['picture']; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $LoggedUser['name']; ?>
@@ -301,10 +297,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?php echo BASEADMIN; ?>/profile" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo BASEADMIN; ?>/login/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -324,7 +320,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo BASEADMIN; ?>/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo BASEADMIN; ?>/assets/dist/img/<?php echo $LoggedUser['picture']; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $LoggedUser['name']; ?></p>
