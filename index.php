@@ -97,9 +97,9 @@
 				<div class="row">
 					<div class="col alert alert-primary" role="alert">
 					<code style="margin-left: -100">
-			      class Instagram extends Model {
+			      class Instagram {
 
-							public static function getPhotos(){
+							public function getPhotos(){
 								$access_token = <?php echo $access_token; ?>;
 								
 								$username = 'usuario';
