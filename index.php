@@ -109,7 +109,7 @@
 						  		highlight_string('
 										$Insta = new Instagram;
 										$Insta::setToken('.$access_token.');
-										$Insta::setUsername(**usuário**);
+										$Insta::setUsername('.$_SESSION["insta_user"].');
 										$insta_result = $Insta::getPhotos();
 						  		')
 
