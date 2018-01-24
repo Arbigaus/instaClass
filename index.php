@@ -96,13 +96,14 @@
 				</div>
 				<div class="row">
 					<div class="col alert alert-primary" role="alert">
-					<code style="margin-left: -100">
+					<code>
+						<?php highlight_string('
 			      class Instagram {
 
 							public function getPhotos(){
 								$access_token = <?php echo $access_token; ?>;
 								
-								$username = 'usuario';
+								$username = "usuario";
 								$user_search = self::rudr_instagram_api_curl_connect("https://api.instagram.com/v1/users/search?q=usuario&access_token=<?php echo $access_token; ?>);
 								// $user_search is an array of objects of all found users
 								// we need only the object of the most relevant user - $user_search->data[0]
@@ -112,7 +113,7 @@
 								// $user_search->data[0]->profile_picture - User Profile Picture URL
 								// $user_search->data[0]->username - Username
 								 
-								$user_id = $user_search->data[0]->id; // or use string 'self' to get your own media
+								$user_id = $user_search->data[0]->id; // or use string "self" to get your own media
 
 								$return = self::rudr_instagram_api_curl_connect("https://api.instagram.com/v1/users/usuario/media/recent?access_token=" . <?php echo $access_token; ?>);
 								 
@@ -134,7 +135,7 @@
 
 							}
 
-						}
+						}'); ?>
 			    </code>
 			    </div>
 				</div>
