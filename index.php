@@ -1,11 +1,13 @@
 <?php 
 	session_start();
 
+	require_once('Instagram.php');
+
 	$redirect_uri = "http://localhost/insta";
 
 	if(isset($_POST['client_id']) && !empty($_POST['client_id']) && !isset($_GET['code'])){
 		$_SESSION['client_id'] = $_POST['client_id'];
-		$client_id = $_POST['client_id'];
+		$_SESSION['insta_user'] = $_POST['insta_user'];
 
 		$_SESSION['client_secret'] = $_POST['client_secret'];
 		
@@ -38,7 +40,13 @@
 
 		$access_token = $result->access_token;
 		
-		// ecit directly the result
+		if(!empty($access_token)){
+			$Insta = new Instagram;
+			$Insta::setToken($access_token);
+			$Insta::setUsername($_SESSION['insta_user']);
+
+			$insta_result = $Insta::getPhotos();
+		}
 	}
 
 
@@ -70,11 +78,15 @@
 					<form method="POST">
 					  <div class="form-group">
 					    <label for="client_id">Client ID</label>
-					    <input type="text" class="form-control" id="client_id" name="client_id" placeholder="Insira Client ID">
+					    <input type="text" class="form-control" id="client_id" name="client_id" placeholder="Insira Client ID" required >
 					  </div>
 					  <div class="form-group">
 					    <label for="client_secret">Client Secret</label>
-					    <input type="text" class="form-control" id="client_secret" name="client_secret" placeholder="Insira Client Secret">
+					    <input type="text" class="form-control" id="client_secret" name="client_secret" placeholder="Insira Client Secret" required >
+					  </div>
+					  <div class="form-group">
+					    <label for="insta_user">Usuário do Instagram</label>
+					    <input type="text" class="form-control" id="insta_user" name="insta_user" placeholder="Insira o usuário do Instagram" required >
 					  </div>
 					  <button type="submit" class="btn btn-primary">Enviar</button>
 					</form>
@@ -83,63 +95,45 @@
 		</div>
 		<?php else: ?>
 			<div class="container">
+
 				<div class="row text-center justify-content-center">
-					<h1>Classe Instagram</h1>
-				</div>
-				<div class="row justify-content-center text-center">
-					<div class="col col-md-8">
-						<span>
-						  <p>Abaixo a classe gerada, para usar basta chamar Instagram->getPhotos</p>
-						  <p>O Access Toekn gerado é: <strong><?php echo $access_token ?></strong></p>
-						</span>
-					</div>
+				<h1>Insta Access Token Generator</h1>
 				</div>
 				<div class="row">
-					<div class="col alert alert-primary" role="alert">
-					<code>
-						<?php highlight_string('
-			      class Instagram {
+					<div class="col col-md-6">
+						<span>
+						  <p>Seu Access Token é: <strong><?php echo $access_token; ?></strong></p>
+						  <p>Chame a Classe conforme abaixo:</p>
+						  <code>
+						  	<?php 
+						  		highlight_string('
+										$Insta = new Instagram;
+										$Insta::setToken('.$access_token.');
+										$Insta::setUsername(**usuário**);
+										$insta_result = $Insta::getPhotos();
+						  		')
 
-							public function getPhotos(){
-								$access_token = <?php echo $access_token; ?>;
-								
-								$username = "usuario";
-								$user_search = self::rudr_instagram_api_curl_connect("https://api.instagram.com/v1/users/search?q=usuario&access_token=<?php echo $access_token; ?>);
-								// $user_search is an array of objects of all found users
-								// we need only the object of the most relevant user - $user_search->data[0]
-								// $user_search->data[0]->id - User ID
-								// $user_search->data[0]->first_name - User First name
-								// $user_search->data[0]->last_name - User Last name
-								// $user_search->data[0]->profile_picture - User Profile Picture URL
-								// $user_search->data[0]->username - Username
-								 
-								$user_id = $user_search->data[0]->id; // or use string "self" to get your own media
-
-								$return = self::rudr_instagram_api_curl_connect("https://api.instagram.com/v1/users/usuario/media/recent?access_token=" . <?php echo $access_token; ?>);
-								 
-								// var_dump( $return ); // if you want to display everything the function returns
-								
-								$returndata = array_slice( $return->data, 0, 3 );
-								
-								return $returndata;	
-							}
-
-								protected static function rudr_instagram_api_curl_connect( $api_url ){
-								$connection_c = curl_init(); // initializing
-								curl_setopt( $connection_c, CURLOPT_URL, $api_url ); // API URL to connect
-								curl_setopt( $connection_c, CURLOPT_RETURNTRANSFER, 1 ); // return the result, do not print
-								curl_setopt( $connection_c, CURLOPT_TIMEOUT, 20 );
-								$json_return = curl_exec( $connection_c ); // connect and get json data
-								curl_close( $connection_c ); // close connection
-								return json_decode( $json_return ); // decode and return
-
-							}
-
-						}'); ?>
-			    </code>
-			    </div>
+						  	 ?>
+						  </code>
+						</span>
+						</div>
 				</div>
+
+				<div class="row">
+				<?php foreach ($insta_result as $pic): ?>				
+				<div class="card col" style="width: 18rem;">
+					<a href="<?php echo $pic->link; ?>">
+				  <img class="card-img-top" src="<?php echo $pic->images->standard_resolution->url; ?>" alt="Card image cap"></a>
+				  <div class="card-body">
+				  	<?php if(!empty($pic->caption)): ?>
+				    <p class="card-text"><?php echo $pic->caption->text; ?></p>
+				    <?php endif; ?>
+				  </div>
+				</div>
+				
+				<?php endforeach; ?>
 			</div>
+		</div>
 
 		
 	<?php endif; ?>
