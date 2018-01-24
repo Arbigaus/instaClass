@@ -38,6 +38,10 @@ class Instagram {
 		self::$username = $user;
 	}
 
+	public function setNumerPhotos($n){
+		self::$number_photos = $n;
+	}
+
 		protected static function rudr_instagram_api_curl_connect( $api_url ){
 		$connection_c = curl_init(); // initializing
 		curl_setopt( $connection_c, CURLOPT_URL, $api_url ); // API URL to connect

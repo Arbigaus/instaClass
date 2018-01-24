@@ -44,6 +44,7 @@
 			$Insta = new Instagram;
 			$Insta::setToken($access_token);
 			$Insta::setUsername($_SESSION['insta_user']);
+			$Insta::setNumerPhotos(3);
 
 			$insta_result = $Insta::getPhotos();
 		}
@@ -110,6 +111,9 @@
 										$Insta = new Instagram;
 										$Insta::setToken('.$access_token.');
 										$Insta::setUsername('.$_SESSION["insta_user"].');
+										// Definir quantas imagens serão buscadas:
+										$Insta::setNumerPhotos(3);
+
 										$insta_result = $Insta::getPhotos();
 						  		')
 
